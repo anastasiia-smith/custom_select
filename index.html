@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        (function ($) {
+            $(function () {
+                var $element = $('.select-with-img .select');
+                var $selectList = $('.select-list')
+                $('.select-with-img').find('.selected').on('click', function (e) {
+                    $(this).parent().find('.select-list').toggleClass('visible');
+                });
+                $('.select-list li').on('click', function (e) {
+                    e.preventDefault();
+
+                    var $option = $(this);
+                    var newValue = $option.html();
+                    var lastValue = $element.html();
+                    $element.html(newValue);
+                    if (newValue != lastValue) {
+                        $element.trigger('change');
+                    }
+                    $option.parent().removeClass('visible');
+                });
+                $(document).on('mouseup', function (e) {
+                    if (!$selectList.is(e.target) && !$element.is(e.target) && $selectList.has(e.target).length === 0) {
+                        $selectList.removeClass('visible');
+                    }
+                });
+            });
+        })(jQuery);
+    </script>
+    <style>
+        .select-with-img {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+          max-width: 300px;
+          max-width: 21.43rem;
+        }
+        .select-with-img .select {
+          padding: 13px 20px;
+          cursor: pointer;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          width: 300px;
+          max-width: 300px;
+          margin: 0 0 20px 0;
+          border: 1px solid #b9c3cd;
+          background-color: #fff;
+          background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNv…4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);
+          background-repeat: no-repeat;
+          background-size: 10px;
+          background-position: 96% 50%;
+        }
+        .select-with-img .select i {
+          color: #00aaff;
+          font-size: 18px;
+          vertical-align: bottom;
+          margin-right: 10px;
+        }
+        .select-with-img .select-list {
+          visibility: hidden;
+          overflow: auto;
+          max-height: 450px;
+          border: 1px solid #b9c3cd;
+          width: 300px;
+          max-width: 300px;
+          margin: 0 0 20px 0;
+          position: absolute;
+          top: 48px;
+          padding: 15px 0;
+          background: #fff;
+          z-index: 4;
+          box-sizing: border-box;
+        }
+        .select-with-img .select-list.visible {
+          visibility: visible;
+        }
+        .select-with-img .select-list li {
+          box-sizing: border-box;
+          padding: 13px 20px;
+          cursor: pointer;
+        }
+        .select-with-img .select-list li:hover {
+          background: #f0f5fa;
+        }
+        .select-with-img .select-list li i {
+          color: #00aaff;
+          font-size: 18px;
+          vertical-align: bottom;
+          margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="select-with-img">
+        <div class="select selected">Overall</div>
+        <ul class="select-list">
+            <li>Overall</li>
+            <li>CNS (Central nervous system)</li>
+            <li>Endurance</li>
+            <li>Inflammation </li>
+            <li>Recovery</li>
+            <li>Strength & power</li>
+            <li>Stress</li>
+            <li>Metabolism</li>
+            <li>Bone & muscle</li>
+            <li>Electrolytes</li>
+            <li>Liver function</li>
+        </ul>
+    </div>
+</body>
+</html>
+
